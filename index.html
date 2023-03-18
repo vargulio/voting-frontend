@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="./assets/images/apple-touch-icon-precomposed.png">
+
+    <script src="./constants/constants.js"></script>
+    <script src="./router.js"></script>
+    <script src="./model/UserManager.js"></script>
+    <script src="./model/PartiesManager.js"></script>
+    <style>
+        #registerError,
+        #loginError {
+            height: 22px;
+            color: red;
+            visibility: hidden;
+        }
+        #home {
+            min-height: 75vh;
+
+        }
+
+        #searchResults {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .details-container {
+            display: flex;
+            gap: 40px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="container text-center" id="login">
+    <main class="form-signin w-100 m-auto">
+        <form id="loginForm">
+            <img class="mb-4" src="./assets/images/apple-touch-icon-precomposed.png" alt="" width="72" height="57">
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+            <div class="form-floating">
+                <input name="username" type="text" class="form-control" id="floatingInput" placeholder="Username">
+                <label for="floatingInput">Username</label>
+            </div>
+            <div class="form-floating">
+                <input name="password" type="password" class="form-control" id="floatingPassword"
+                       placeholder="Password">
+                <label for="floatingPassword">Password</label>
+            </div>
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <small id="loginError">Bahur</small>
+            <button id="submitLogin" disabled class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            <a href="#register">Don't have an account yet? Create one here</a>
+            <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
+        </form>
+    </main>
+
+</div>
+<div class="container text-center" id="register">
+    <main class="form-signin w-100 m-auto">
+        <form id="registerForm">
+            <img class="mb-4" src="./assets/images/apple-touch-icon-precomposed.png" alt="" width="72" height="57">
+            <h1 class="h3 mb-3 fw-normal">Register</h1>
+
+            <div class="form-floating">
+                <input name="username" type="text" class="form-control" id="floatingInput" placeholder="Username">
+                <label for="floatingInput">Username</label>
+            </div>
+            <div class="form-floating">
+                <input name="password" type="password" class="form-control" id="floatingPassword"
+                       placeholder="Password">
+                <label for="floatingPassword">Password</label>
+            </div>
+            <div class="form-floating">
+                <input name="confirmPass" type="password" class="form-control" id="floatingPassword"
+                       placeholder="Confirm Password">
+                <label for="floatingPassword">Confirm Password</label>
+            </div>
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <small id="registerError">Bahur</small>
+
+            <button class="w-100 btn btn-lg btn-primary" disabled id="submitRegister" type="submit">Register</button>
+            <a href="#login">Already have an account? Sign in here</a>
+
+            <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
+        </form>
+    </main>
+
+</div>
+
+<div id="home">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                <use xlink:href="#bootstrap"></use>
+            </svg>
+        </a>
+
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="#results" class="nav-link px-2 link-secondary">Results</a></li>
+        </ul>
+
+        <div class="col-md-3 text-end">
+            <button type="button" class="btn btn-outline-primary me-2">Logout</button>
+        </div>
+    </header>
+    <div class="container">
+        <div class="mb-3">
+            <input type="text" class="form-control" id="searchParties" placeholder="Search for parties">
+        </div>
+        <div id="searchResults">
+        </div>
+    </div>
+
+</div>
+
+<div id="details">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                <use xlink:href="#bootstrap"></use>
+            </svg>
+        </a>
+
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="#results" class="nav-link px-2 link-secondary">Results</a></li>
+        </ul>
+
+        <div class="col-md-3 text-end">
+            <button type="button" class="btn btn-outline-primary me-2">Logout</button>
+        </div>
+    </header>
+    <div class="container details-container">
+
+        <div>
+            <img id="picture" src="https://i.ytimg.com/vi/m9bLJUI0BnU/hqdefault.jpg">
+            <span id="slogan">More grass for the mass!</span>
+        </div>
+        <div>
+            <span>Slavozar Vargulev</span>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus alias commodi debitis dignissimos ea eligendi ex expedita incidunt ipsa maxime minus molestiae nihil odio odit officia reprehenderit sapiente sequi, totam?</p>
+            <button>Vote</button>
+            <button>Results</button>
+        </div>
+    </div>
+
+</div>
+<script src="./controllers/loginController.js"></script>
+<script src="./controllers/registerController.js"></script>
+<script src="./controllers/homeController.js"></script>
+<script src="./controllers/detailsController.js"></script>
+<script src="./main.js"></script>
+
+</body>
+</html>

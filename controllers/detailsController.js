@@ -1,0 +1,7 @@
+class DetailsController {
+
+
+    render() {
+
+    }
+}
